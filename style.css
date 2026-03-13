@@ -1,0 +1,296 @@
+/* ======================================================= */
+/* THEME: Modern Earth & Minimal (Full Balanced 2026) */
+/* ======================================================= */
+
+:root {
+    --primary: #8D7B68;
+    --secondary: #C8B6A6;
+    --accent: #A4907C;
+    --dark: #2C2C2C;
+    --light: #FAF9F6;
+    --white: #FFFFFF;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* 1. Header (Sticky & Glassmorphism) */
+.main-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.logo h2 { font-size: 1.8rem; font-weight: 600; letter-spacing: -1px; }
+
+.search-bar { flex-grow: 1; max-width: 500px; position: relative; }
+.search-bar input { 
+    width: 100%; padding: 12px 50px 12px 20px; border: 1px solid #eee; 
+    background: #f5f5f5; border-radius: 50px; outline: none; transition: 0.3s; 
+}
+.search-bar input:focus { background: white; border-color: var(--primary); }
+.search-bar button { 
+    position: absolute; right: 5px; top: 50%; transform: translateY(-50%); 
+    background: var(--primary); color: white; width: 35px; height: 35px; 
+    border-radius: 50%; border: none; cursor: pointer; 
+}
+
+.user-actions { display: flex; gap: 20px; }
+.icon-link { color: var(--dark); font-size: 1.4rem; transition: 0.3s; }
+.icon-link:hover { color: var(--primary); transform: scale(1.1); }
+
+/* 2. Hero Section */
+.hero-full {
+    height: 500px;
+    background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+}
+.hero-overlay { width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); display: flex; align-items: center; }
+.hero-text { max-width: 500px; animation: fadeUp 1s ease; }
+.tag { display: inline-block; background: var(--dark); color: white; padding: 5px 10px; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; }
+.hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+.hero-text em { font-family: serif; font-style: italic; color: var(--primary); }
+.btn-primary { padding: 15px 40px; background: var(--primary); color: white; border: none; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+
+/* 3. SHOP BY CATEGORY (Desktop First) */
+.section-title { text-align: center; margin: 60px 0 40px; }
+.section-title h3 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+.section-title .line { width: 60px; height: 3px; background-color: var(--primary); margin: 0 auto; border-radius: 50px; }
+
+.category-icons { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; flex-wrap: nowrap; }
+.icon-item { text-align: center; cursor: pointer; width: 150px; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
+.img-circle {
+    width: 110px; height: 110px; border-radius: 50% !important; overflow: hidden; 
+    margin-bottom: 15px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.img-circle img { width: 100%; height: 100%; object-fit: cover; }
+.icon-item:hover .img-circle { border-color: var(--primary); transform: translateY(-5px); }
+.icon-item span { font-weight: 500; font-size: 1rem; color: #555; }
+
+/* 4. Service Grid */
+.relative-box { position: relative; margin-top: 20px; z-index: 10; margin-bottom: 60px; }
+.service-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); 
+    background: white; box-shadow: var(--shadow); padding: 30px; border-radius: 4px;
+}
+.service-item { display: flex; align-items: center; gap: 15px; padding: 0 20px; border-right: 1px solid #eee; }
+.service-item:last-child { border-right: none; }
+.service-item i { font-size: 2rem; color: var(--accent); }
+.service-item h3 { font-size: 1.1rem; margin-bottom: 3px; }
+.service-item p { font-size: 0.85rem; color: #888; }
+
+/* 5. Product Grid */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding-bottom: 80px; }
+.product-card { background: white; transition: 0.3s; position: relative; cursor: pointer; }
+.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.p-img { height: 300px; position: relative; overflow: hidden; background: #f0f0f0; }
+.p-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.p-info { padding: 15px; text-align: center; }
+.p-price { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+
+/* 6. Contact Button System */
+.floating-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; align-items: flex-end; cursor: pointer; }
+.line-bubble {
+    background-color: white; color: #00B900; font-weight: 900; padding: 8px 20px; 
+    border-radius: 50px; margin-bottom: 5px; margin-right: 10px; box-shadow: var(--shadow);
+    text-decoration: none; opacity: 0; visibility: hidden; transform: translateY(10px); transition: 0.3s;
+}
+.line-bubble.show-bubble { opacity: 1; visibility: visible; transform: translateY(0); }
+.red-badge {
+    background-color: #D32F2F; color: white; font-weight: bold; font-size: 0.9rem;
+    padding: 10px 20px; border-radius: 20px 20px 0 20px; margin-bottom: -15px; margin-right: 5px;
+    position: relative; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.icon-circle {
+    width: 70px; height: 70px; background-color: white; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; font-size: 35px;
+    color: #D4A373; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white;
+}
+
+/* ======================================================= */
+/* RESPONSIVE DESIGN (iPad & Mobile) - ฉบับรวมครบทุกจุด */
+/* ======================================================= */
+
+/* iPad/Tablet: ปรับขนาดให้พอดีหน้าจอขนาดกลาง */
+@media (max-width: 1024px) {
+    .category-icons { gap: 30px; }
+    .img-circle { width: 95px; height: 95px; }
+}
+
+/* Mobile: รวมจุดแก้ปุ่มติดต่อ + Banner กึ่งกลาง + หมวดหมู่เรียง 4 */
+@media (max-width: 768px) {
+    
+    /* 1. แก้ไขปุ่มติดต่อ: ให้เล็กลง ไม่บดบังสินค้า (ตามรูป IMG_1441) */
+    .floating-container {
+        bottom: 15px !important; 
+        right: 15px !important;
+    }
+    .red-badge {
+        padding: 6px 12px !important;
+        font-size: 0.75rem !important;
+        margin-bottom: -10px !important;
+        margin-right: 5px !important;
+    }
+    .icon-circle {
+        width: 55px !important; /* ขนาดพอดีนิ้วแต่ไม่บังจอ */
+        height: 55px !important;
+        font-size: 28px !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .line-bubble {
+        padding: 6px 15px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* 2. Hero Banner: จัดกึ่งกลางให้สมดุล (ตามรูป IMG_1438) */
+    .hero-full { 
+        height: 450px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .hero-overlay { justify-content: center; background: rgba(255,255,255,0.4); }
+    .hero-text { padding: 0 20px; width: 100%; }
+    .hero-text h1 { font-size: 2.2rem !important; margin-bottom: 15px; }
+    .hero-text p { font-size: 1rem; margin-bottom: 25px; }
+    .btn-primary { padding: 12px 30px; width: auto; display: inline-flex; }
+
+    /* 3. Category: บีบให้เรียง 4 อันในบรรทัดเดียว (ตามรูป image_60d823) */
+    .category-icons {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between;
+        gap: 5px;
+        padding: 20px 10px;
+        overflow-x: hidden; /* ล็อคไม่ให้ขยับ/เลื่อน */
+    }
+    .icon-item { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; }
+    .img-circle {
+        width: 65px !important; /* ขนาดวงกลมจิ๋วเพื่อให้ลง 4 อันพอดี */
+        height: 65px !important;
+        border-radius: 50% !important;
+        margin-bottom: 8px;
+        border: 2px solid white;
+    }
+    .icon-item span { font-size: 0.72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+
+    /* 4. ส่วนประกอบอื่นๆ (Header & Service) */
+    .header-content { flex-direction: row; flex-wrap: wrap; }
+    .search-bar { order: 3; width: 100%; margin-top: 10px; }
+    .relative-box { margin-top: 10px !important; padding: 0 10px; }
+    .service-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+    .service-item { flex-direction: column; border-right: none; border-bottom: 1px solid #eee; padding: 15px 0; }
+    .service-item:last-child { border-bottom: none; }
+}
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== RESPONSIVE ENHANCEMENTS ===== */
+
+/* Header responsive */
+@media (max-width: 768px) {
+    .main-header { padding: 10px 0; position: sticky; top: 0; z-index: 500; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .header-content { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 8px;
+        padding: 0 15px;
+    }
+    .logo h2 { font-size: 1.2rem; white-space: nowrap; }
+    .search-bar { 
+        display: none !important; 
+    }
+    .search-bar.active {
+        display: flex !important;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 600;
+        background: white;
+        padding: 12px 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    .search-bar.active input { flex: 1; }
+    .user-actions { display: flex; align-items: center; gap: 12px; }
+    .user-actions .icon-link { font-size: 1.1rem; padding: 5px; }
+    /* Add search icon that toggles search bar */
+    .search-toggle-btn {
+        background: none; border: none; font-size: 1.1rem;
+        color: #8D7B68; cursor: pointer; padding: 5px;
+    }
+}
+
+/* Product grid - category pages */
+@media (max-width: 600px) {
+    .products-section { padding: 20px 12px; }
+    .section-title { font-size: 1.3rem; margin-bottom: 15px; }
+    .filter-bar { 
+        display: flex; 
+        gap: 6px; 
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+    .filter-bar button { font-size: 0.78rem; padding: 6px 12px; }
+    /* Product grid 2 column on mobile */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    .product-card { border-radius: 10px; }
+    .product-card img { height: 160px !important; }
+    .product-info { padding: 10px !important; }
+    .product-info h3 { font-size: 0.9rem !important; }
+    .product-info .price { font-size: 0.95rem !important; }
+}
+
+/* Shop overlay menu responsive */
+@media (max-width: 768px) {
+    .shop-overlay { align-items: flex-end !important; }
+    .shop-menu-inner { 
+        width: 100% !important; 
+        max-width: 100% !important;
+        border-radius: 20px 20px 0 0 !important;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    .shop-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Hero section - tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-text h1 { font-size: 2.5rem; }
+    .category-icons { gap: 20px; }
+    .img-circle { width: 85px; height: 85px; }
+}
+
+/* Product detail page */
+@media (max-width: 480px) {
+    .product-layout { gap: 20px !important; }
+    .thumbnail-strip { gap: 6px !important; }
+    .thumbnail-strip img { width: 55px !important; height: 55px !important; }
+    .add-to-cart-btn { font-size: 0.95rem; padding: 14px !important; }
+    .price-row .actual-price { font-size: 1.4rem !important; }
+}
+
+/* iPad (tablet) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .header-content { padding: 0 25px; }
+}

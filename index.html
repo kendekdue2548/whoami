@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me Sofa Design - Minimal Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-style.css">
+    
+
+    <style>
+    /* ===== FESTIVAL THEMES - ENHANCED ===== */
+
+    /* Particle container */
+    #festivalParticles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .hero-full { position: relative; overflow: hidden; }
+    .hero-overlay { position: relative; z-index: 2; }
+
+    /* ======================== */
+    /* --- SONGKRAN สงกรานต์ --- */
+    /* ======================== */
+    body.festival-songkran .hero-full {
+        background: linear-gradient(160deg, #0369a1 0%, #0ea5e9 40%, #38bdf8 70%, #7dd3fc 100%) !important;
+        background-image: none !important;
+    }
+    body.festival-songkran .hero-overlay {
+        background: linear-gradient(90deg, rgba(2,80,120,0.15) 0%, transparent 60%) !important;
+    }
+    body.festival-songkran .hero-text .tag {
+        background: rgba(255,255,255,0.95);
+        color: #0369a1;
+        font-weight: 700;
+        letter-spacing: 2px;
+        box-shadow: 0 2px 12px rgba(3,105,161,0.25);
+    }
+    body.festival-songkran .hero-text h1 { color: #fff; text-shadow: 0 2px 20px rgba(3,105,161,0.4); }
+    body.festival-songkran .hero-text h1 em { color: #fef08a; font-style: italic; text-shadow: 0 2px 12px rgba(254,240,138,0.6); }
+    body.festival-songkran .hero-text p { color: rgba(255,255,255,0.95); }
+    body.festival-songkran .btn-primary {
+        background: #fff !important;
+        color: #0369a1 !important;
+        border: none !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 20px rgba(255,255,255,0.4) !important;
+    }
+    /* Songkran water drop particles */
+    .drop {
+        position: absolute;
+        width: 6px;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        opacity: 0;
+        animation: rainDrop linear infinite;
+    }
+    @keyframes rainDrop {
+        0%   { transform: translateY(-20px) rotate(15deg); opacity: 0.9; }
+        80%  { opacity: 0.7; }
+        100% { transform: translateY(110vh) rotate(15deg); opacity: 0; }
+    }
+    /* Ripple at bottom */
+    body.festival-songkran .hero-full::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 80px;
+        background: linear-gradient(to top, rgba(3,105,161,0.35), transparent);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* ======================== */
+    /* --- NEWYEAR ปีใหม่ ---  */
+    /* ======================== */
+    body.festival-newyear .hero-full {
+        background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 40%, #0f2460 100%) !important;
+        background-image: none !important;
+    }
+    body.festival-newyear .hero-overlay {
+        background: transparent !important;
+    }
+    body.festival-newyear .hero-text .tag {
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        color: #1a1040;
+        font-weight: 700;
+        letter-spacing: 2px;
+        box-shadow: 0 2px 20px rgba(251,191,36,0.5);
+    }
+    body.festival-newyear .hero-text h1 { color: #fff; text-shadow: 0 0 40px rgba(251,191,36,0.3); }
+    body.festival-newyear .hero-text h1 em { color: #fbbf24; text-shadow: 0 0 20px rgba(251,191,36,0.8); }
+    body.festival-newyear .hero-text p { color: rgba(255,255,255,0.85); }
+    body.festival-newyear .btn-primary {
+        background: linear-gradient(90deg, #f59e0b, #fbbf24) !important;
+        color: #1a1040 !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 24px rgba(251,191,36,0.5) !important;
+    }
+    /* Twinkle stars */
+    .star {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        animation: twinkle ease-in-out infinite;
+    }
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.1; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.4); }
+    }
+    /* Firework sparks */
+    .spark {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        animation: sparkFly ease-out forwards;
+    }
+    @keyframes sparkFly {
+        0% { transform: translate(0,0) scale(1); opacity: 1; }
+        100% { transform: var(--dx) scale(0); opacity: 0; }
+    }
+    .firework-center {
+        position: absolute;
+        animation: fireworkPop 2.5s ease-in-out infinite;
+    }
+    @keyframes fireworkPop {
+        0%, 60%, 100% { opacity: 0; }
+        5%, 50% { opacity: 1; }
+    }
+
+    /* ============================ */
+    /* --- LOY KRATHONG ลอยกระทง --- */
+    /* ============================ */
+    body.festival-loykrathong .hero-full {
+        background: linear-gradient(180deg, #050c1f 0%, #0d1b3e 40%, #1a2a50 70%, #0d1b3e 100%) !important;
+        background-image: none !important;
+    }
+    body.festival-loykrathong .hero-overlay {
+        background: transparent !important;
+    }
+    body.festival-loykrathong .hero-text .tag {
+        background: #f97316;
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 2px;
+        box-shadow: 0 2px 16px rgba(249,115,22,0.5);
+    }
+    body.festival-loykrathong .hero-text h1 { color: #fef3c7; text-shadow: 0 2px 24px rgba(249,115,22,0.4); }
+    body.festival-loykrathong .hero-text h1 em { color: #fb923c; text-shadow: 0 0 20px rgba(251,146,60,0.8); }
+    body.festival-loykrathong .hero-text p { color: rgba(254,243,199,0.9); }
+    body.festival-loykrathong .btn-primary {
+        background: linear-gradient(90deg, #f97316, #fb923c) !important;
+        color: #fff !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 20px rgba(249,115,22,0.5) !important;
+    }
+    /* Moon glow */
+    body.festival-loykrathong .hero-full::before {
+        content: '';
+        position: absolute;
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,230,100,0.6) 0%, rgba(255,200,50,0.25) 50%, transparent 70%);
+        top: 12%; right: 8%;
+        box-shadow: 0 0 60px 20px rgba(255,220,80,0.2);
+        z-index: 1;
+        animation: moonGlow 4s ease-in-out infinite;
+    }
+    @keyframes moonGlow {
+        0%, 100% { box-shadow: 0 0 60px 20px rgba(255,220,80,0.2); }
+        50% { box-shadow: 0 0 80px 30px rgba(255,220,80,0.35); }
+    }
+    /* Floating krathong */
+    .krathong {
+        position: absolute;
+        font-size: 28px;
+        animation: floatUp linear infinite;
+        opacity: 0;
+        filter: drop-shadow(0 0 8px rgba(255,140,0,0.8));
+    }
+    @keyframes floatUp {
+        0%   { transform: translateY(0) translateX(0) rotate(-5deg); opacity: 0; }
+        10%  { opacity: 0.9; }
+        50%  { transform: translateY(-45vh) translateX(30px) rotate(5deg); opacity: 0.8; }
+        100% { transform: translateY(-100vh) translateX(-20px) rotate(-3deg); opacity: 0; }
+    }
+    /* Fireflies */
+    .firefly {
+        position: absolute;
+        width: 4px; height: 4px;
+        border-radius: 50%;
+        background: #fbbf24;
+        animation: fireflyFloat ease-in-out infinite;
+        box-shadow: 0 0 6px 2px rgba(251,191,36,0.8);
+    }
+    @keyframes fireflyFloat {
+        0%, 100% { transform: translate(0,0); opacity: 0.2; }
+        25% { transform: translate(20px,-15px); opacity: 1; }
+        50% { transform: translate(-10px,-30px); opacity: 0.6; }
+        75% { transform: translate(15px,-20px); opacity: 1; }
+    }
+
+    /* ============================ */
+    /* --- VALENTINE วาเลนไทน์ --- */
+    /* ============================ */
+    body.festival-valentine .hero-full {
+        background: linear-gradient(135deg, #4a0020 0%, #881337 45%, #be123c 80%, #9f1239 100%) !important;
+        background-image: none !important;
+    }
+    body.festival-valentine .hero-overlay {
+        background: transparent !important;
+    }
+    body.festival-valentine .hero-text .tag {
+        background: rgba(255,220,230,0.95);
+        color: #881337;
+        font-weight: 700;
+        letter-spacing: 2px;
+        box-shadow: 0 2px 16px rgba(136,19,55,0.3);
+    }
+    body.festival-valentine .hero-text h1 { color: #fff; text-shadow: 0 2px 20px rgba(136,19,55,0.4); }
+    body.festival-valentine .hero-text h1 em { color: #fda4af; text-shadow: 0 0 20px rgba(253,164,175,0.8); }
+    body.festival-valentine .hero-text p { color: rgba(255,255,255,0.95); }
+    body.festival-valentine .btn-primary {
+        background: linear-gradient(90deg, #fda4af, #fb7185) !important;
+        color: #881337 !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 20px rgba(251,113,133,0.5) !important;
+    }
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        animation: heartFloat linear infinite;
+        opacity: 0;
+        filter: drop-shadow(0 0 4px rgba(251,113,133,0.6));
+        user-select: none;
+    }
+    @keyframes heartFloat {
+        0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+        10%  { opacity: 0.85; }
+        50%  { transform: translateY(-50vh) scale(0.9) rotate(15deg); opacity: 0.7; }
+        100% { transform: translateY(-105vh) scale(0.5) rotate(-10deg); opacity: 0; }
+    }
+    /* Rose petals */
+    .petal {
+        position: absolute;
+        font-size: 16px;
+        animation: petalFall linear infinite;
+        opacity: 0;
+    }
+    @keyframes petalFall {
+        0%   { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+        10%  { opacity: 0.8; }
+        100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ======================== */
+    /* --- SHARED UTILITIES --- */
+    /* ======================== */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+    }
+    /* Festival banner ribbon */
+    .festival-ribbon {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        z-index: 10;
+    }
+    body.festival-songkran .festival-ribbon   { background: linear-gradient(90deg, #38bdf8, #0ea5e9, #fef08a, #0ea5e9, #38bdf8); }
+    body.festival-newyear .festival-ribbon    { background: linear-gradient(90deg, #fbbf24, #f59e0b, #fff, #f59e0b, #fbbf24); animation: shimmer 2s linear infinite; background-size: 200%; }
+    body.festival-loykrathong .festival-ribbon{ background: linear-gradient(90deg, #f97316, #fbbf24, #f97316, #fbbf24, #f97316); }
+    body.festival-valentine .festival-ribbon  { background: linear-gradient(90deg, #fb7185, #fda4af, #fff, #fda4af, #fb7185); }
+    @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <h2>ME SOFA.</h2> 
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="ค้นหาเฟอร์นิเจอร์ชิ้นโปรด...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="user-actions">
+                <a href="#" class="icon-link" onclick="toggleShopMenu(); return false;"><i class="fas fa-shopping-bag"></i></a>
+                <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-full">
+        <div class="festival-ribbon"></div>
+        <div id="festivalParticles"></div>
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-text">
+                    <span class="tag" id="heroTag">NEW ARRIVAL 2026</span>
+                    <h1 id="heroTitle">Make Your Home<br>Feel Like <em id="heroEm">Heaven</em></h1>
+                    <p id="heroSub">สัมผัสความนุ่มสบายที่ออกแบบได้เอง ในสไตล์ที่เป็นคุณ</p>
+                    <button class="btn-primary" id="heroBtn" onclick="location.href='living-room.html'">ช้อปสินค้าใหม่ <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section-title">
+            <h3>SHOP BY CATEGORY</h3>
+            <div class="line"></div>
+        </div>
+
+        <section class="category-icons">
+            <div class="icon-item active" onclick="location.href='living-room.html'" style="cursor: pointer;">
+                <div class="img-circle">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=300&auto=format&fit=crop" alt="Living Room">
+                </div>
+                <span>Living Room</span>
+            </div>
+
+            <div class="icon-item" onclick="location.href='bedroom.html'" style="cursor:pointer;">
+                <div class="img-circle">
+                    <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bedroom">
+                </div>
+                <span>Bedroom</span>
+            </div>
+
+            <div class="icon-item" onclick="location.href='dining-room.html'" style="cursor:pointer;">
+                <div class="img-circle">
+                    <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=300&auto=format&fit=crop" alt="Dining">
+                </div>
+                <span>Dining Room</span>
+            </div>
+
+            <div class="icon-item" onclick="location.href='office.html'" style="cursor:pointer;">
+                <div class="img-circle">
+                    <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=80&w=300&auto=format&fit=crop" alt="Office">
+                </div>
+                <span>Office</span>
+            </div>
+        </section>
+    </div>
+
+    <div class="container relative-box">
+        <div class="service-grid">
+            <div class="service-item">
+                <i class="fas fa-couch"></i>
+                <div>
+                    <h3>Custom Made</h3>
+                    <p>เลือกขนาดและวัสดุได้ดั่งใจ</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-tools"></i>
+                <div>
+                    <h3>Renovation</h3>
+                    <p>บริการหุ้มเบาะ ซ่อมแซม</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-shipping-fast"></i>
+                <div>
+                    <h3>Free Shipping</h3>
+                    <p>ส่งฟรี กทม. และปริมณฑล</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   <div class="floating-container" id="masterBtn" onclick="toggleLineBubble(event)">
+        <a href="https://line.me/ti/p/ใส่IDLineของคุณตรงนี้" target="_blank" class="line-bubble" id="lineBubble">
+            <span class="at-symbol">@</span> LINE
+        </a>
+        <div class="main-contact-btn">
+            <div class="red-badge">
+                <span>ติดต่อ</span>
+                <span>สอบถาม</span>
+            </div>
+            <div class="icon-circle">
+                <i class="fab fa-line"></i> 
+            </div>
+        </div>
+    </div>
+
+    <div class="shop-overlay" id="shopOverlay">
+        <div class="shop-menu-content">
+            <div class="menu-header">
+                <h3>ช้อปสินค้า</h3>
+                <button class="close-btn" onclick="toggleShopMenu()"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="menu-list">
+                <li onclick="location.href='living-room.html'">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=150" alt="Living Room">
+                    <span>โซฟาและอาร์มแชร์ (Living Room)</span>
+                    <i class="fas fa-chevron-right"></i>
+                </li>
+                <li>
+                    <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Bedroom">
+                    <span>เตียงนอนและที่นอน (Bedroom)</span>
+                    <i class="fas fa-chevron-right"></i>
+                </li>
+                <li>
+                    <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=150" alt="Dining">
+                    <span>โต๊ะและเก้าอี้ทานข้าว (Dining Room)</span>
+                    <i class="fas fa-chevron-right"></i>
+                </li>
+                <li>
+                    <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=80&w=150" alt="Office">
+                    <span>โต๊ะทำงาน (Home Office)</span>
+                    <i class="fas fa-chevron-right"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let bubbleTimer = null;
+        function toggleLineBubble(event) {
+            if (event.target.closest('.line-bubble')) return;
+            event.preventDefault();
+            event.stopPropagation();
+
+            const bubble = document.getElementById('lineBubble');
+            const isOpen = bubble.classList.contains('show-bubble');
+
+            if (isOpen) {
+                bubble.classList.remove('show-bubble');
+                if (bubbleTimer) clearTimeout(bubbleTimer);
+            } else {
+                bubble.classList.add('show-bubble');
+                if (bubbleTimer) clearTimeout(bubbleTimer);
+                bubbleTimer = setTimeout(() => {
+                    bubble.classList.remove('show-bubble');
+                }, 120000);
+            }
+        }
+    </script> <script src="nav-script.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+<script>
+    // 2. ตั้งค่าการเชื่อมต่อ (Config)
+    const firebaseConfig = {
+        apiKey: "AIzaSyDFdgBMHIPgNGWhwR7gs1arC1lJbVYNr3k",
+        authDomain: "mesofa-admin.firebaseapp.com",
+        databaseURL: "https://mesofa-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "mesofa-admin",
+        storageBucket: "mesofa-admin.firebasestorage.app",
+        messagingSenderId: "758172615910",
+        appId: "1:758172615910:web:920af81b94c1b4b071e727"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // ===== FESTIVAL THEME SYSTEM =====
+    const festivalThemes = {
+        songkran: {
+            tag: '💧 สงกรานต์ 2026',
+            title: 'ฉลองสงกรานต์',
+            em: 'กับ ME SOFA.',
+            sub: 'สาดน้ำมาได้ แต่โซฟาของเรายังสวยเหมือนเดิม 😄',
+            btn: 'ดูโปรโมชั่นพิเศษ'
+        },
+        newyear: {
+            tag: '🎆 Happy New Year 2026',
+            title: 'ต้อนรับปีใหม่',
+            em: 'กับบ้านใหม่',
+            sub: 'เริ่มต้นปีใหม่ด้วยเฟอร์นิเจอร์คุณภาพสูง สไตล์ที่ใช่',
+            btn: 'ช้อปของขวัญปีใหม่'
+        },
+        loykrathong: {
+            tag: '🪔 ลอยกระทง 2026',
+            title: 'คืนพระจันทร์เต็มดวง',
+            em: 'บ้านก็ต้องสวย',
+            sub: 'ลอยกระทงไปแล้ว กลับบ้านมาก็ต้องสวยด้วย ME SOFA',
+            btn: 'ช้อปโปรลอยกระทง'
+        },
+        valentine: {
+            tag: '💕 Valentine's Day',
+            title: 'มอบความรัก',
+            em: 'ผ่านเฟอร์นิเจอร์',
+            sub: 'เซอร์ไพรส์คนที่รักด้วยโซฟาสุดพิเศษ ออกแบบเองได้',
+            btn: 'ช้อปของขวัญวาเลนไทน์'
+        }
+    };
+
+    // ===== PARTICLE GENERATOR =====
+    function generateParticles(theme) {
+        const container = document.getElementById('festivalParticles');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (theme === 'songkran') {
+            // Rain drops
+            const colors = ['#bae6fd','#e0f2fe','#fff','#7dd3fc','#fef08a'];
+            for (let i = 0; i < 60; i++) {
+                const el = document.createElement('div');
+                el.className = 'drop';
+                const size = Math.random() * 8 + 4;
+                el.style.cssText = `
+                    left: ${Math.random()*100}%;
+                    top: ${Math.random()*-30}%;
+                    width: ${size}px;
+                    height: ${size*2}px;
+                    background: ${colors[Math.floor(Math.random()*colors.length)]};
+                    animation-duration: ${Math.random()*2+1.2}s;
+                    animation-delay: ${Math.random()*4}s;
+                    opacity: ${Math.random()*0.5+0.4};
+                `;
+                container.appendChild(el);
+            }
+            // Big decorative emojis
+            ['💧','🌸','💦','🌊'].forEach((em, i) => {
+                const el = document.createElement('div');
+                el.style.cssText = `position:absolute;font-size:${60+i*20}px;opacity:0.12;
+                    top:${[10,60,20,50][i]}%;left:${[75,10,85,5][i]}%;
+                    animation:float ${3+i}s ease-in-out infinite ${i%2===0?'':'reverse'};pointer-events:none;`;
+                el.textContent = em;
+                container.appendChild(el);
+            });
+
+        } else if (theme === 'newyear') {
+            // Twinkling stars
+            for (let i = 0; i < 80; i++) {
+                const el = document.createElement('div');
+                el.className = 'star';
+                const sz = Math.random()*3+1;
+                el.style.cssText = `
+                    left:${Math.random()*100}%;top:${Math.random()*100}%;
+                    width:${sz}px;height:${sz}px;
+                    animation-duration:${Math.random()*2+1}s;
+                    animation-delay:${Math.random()*3}s;
+                `;
+                container.appendChild(el);
+            }
+            // Firework bursts
+            const positions = [[20,30],[70,20],[50,60],[80,45],[15,70],[60,15]];
+            positions.forEach(([x,y], fi) => {
+                const center = document.createElement('div');
+                center.className = 'firework-center';
+                center.style.cssText = `left:${x}%;top:${y}%;animation-delay:${fi*0.4}s;animation-duration:2.5s;`;
+                const sparkColors = ['#fbbf24','#f59e0b','#fff','#fde68a','#fb923c','#60a5fa'];
+                for (let s = 0; s < 14; s++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'spark';
+                    const angle = (s/14)*360;
+                    const dist = Math.random()*60+30;
+                    const dx = `translate(${Math.cos(angle*Math.PI/180)*dist}px,${Math.sin(angle*Math.PI/180)*dist}px)`;
+                    spark.style.cssText = `
+                        background:${sparkColors[s%sparkColors.length]};
+                        box-shadow:0 0 4px 2px ${sparkColors[s%sparkColors.length]};
+                        --dx:${dx};
+                        width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;
+                        animation-duration:${Math.random()*0.6+0.5}s;
+                        animation-delay:${fi*0.4}s;
+                        animation-iteration-count:infinite;
+                        animation-direction:normal;
+                    `;
+                    center.appendChild(spark);
+                }
+                container.appendChild(center);
+            });
+            // Decorative emojis
+            ['🎆','✨','🎇','⭐'].forEach((em,i) => {
+                const el = document.createElement('div');
+                el.style.cssText = `position:absolute;font-size:${55+i*15}px;opacity:0.15;
+                    top:${[5,55,15,65][i]}%;left:${[72,8,80,65][i]}%;
+                    animation:float ${3+i*0.5}s ease-in-out infinite ${i%2===0?'':'reverse'};pointer-events:none;`;
+                el.textContent = em;
+                container.appendChild(el);
+            });
+
+        } else if (theme === 'loykrathong') {
+            // Floating krathongs
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.className = 'krathong';
+                el.textContent = ['🪔','🌺','🪔','🌸'][i%4];
+                el.style.cssText = `
+                    left:${Math.random()*90+5}%;
+                    bottom:${Math.random()*10-5}%;
+                    font-size:${Math.random()*16+18}px;
+                    animation-duration:${Math.random()*5+6}s;
+                    animation-delay:${Math.random()*6}s;
+                `;
+                container.appendChild(el);
+            }
+            // Fireflies
+            for (let i = 0; i < 25; i++) {
+                const el = document.createElement('div');
+                el.className = 'firefly';
+                el.style.cssText = `
+                    left:${Math.random()*95}%;top:${Math.random()*85+5}%;
+                    animation-duration:${Math.random()*3+3}s;
+                    animation-delay:${Math.random()*4}s;
+                    background:${['#fbbf24','#fb923c','#fde68a'][Math.floor(Math.random()*3)]};
+                    width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;
+                    box-shadow:0 0 ${Math.random()*6+4}px 2px rgba(251,191,36,0.8);
+                `;
+                container.appendChild(el);
+            }
+            // Stars
+            for (let i = 0; i < 40; i++) {
+                const el = document.createElement('div');
+                el.className = 'star';
+                const sz = Math.random()*2+1;
+                el.style.cssText = `
+                    left:${Math.random()*100}%;top:${Math.random()*70}%;
+                    width:${sz}px;height:${sz}px;background:#fef3c7;
+                    animation-duration:${Math.random()*2+1.5}s;
+                    animation-delay:${Math.random()*3}s;
+                `;
+                container.appendChild(el);
+            }
+            // Moon already via ::before CSS
+
+        } else if (theme === 'valentine') {
+            // Floating hearts
+            const heartEmojis = ['❤️','💕','💗','💖','💝','🌹','💓'];
+            for (let i = 0; i < 25; i++) {
+                const el = document.createElement('div');
+                el.className = 'heart';
+                el.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+                el.style.cssText = `
+                    left:${Math.random()*95}%;
+                    bottom:${Math.random()*10-5}%;
+                    font-size:${Math.random()*18+14}px;
+                    animation-duration:${Math.random()*5+5}s;
+                    animation-delay:${Math.random()*6}s;
+                `;
+                container.appendChild(el);
+            }
+            // Rose petals falling
+            for (let i = 0; i < 20; i++) {
+                const el = document.createElement('div');
+                el.className = 'petal';
+                el.textContent = '🌸';
+                el.style.cssText = `
+                    left:${Math.random()*100}%;
+                    top:-10px;
+                    font-size:${Math.random()*10+12}px;
+                    animation-duration:${Math.random()*4+5}s;
+                    animation-delay:${Math.random()*5}s;
+                `;
+                container.appendChild(el);
+            }
+            // Big decorative
+            ['💕','🌹','💖','🥀'].forEach((em,i) => {
+                const el = document.createElement('div');
+                el.style.cssText = `position:absolute;font-size:${65+i*15}px;opacity:0.12;
+                    top:${[8,55,15,60][i]}%;left:${[73,7,82,62][i]}%;
+                    animation:float ${3.5+i*0.5}s ease-in-out infinite ${i%2===0?'':'reverse'};pointer-events:none;`;
+                el.textContent = em;
+                container.appendChild(el);
+            });
+        }
+    }
+
+    db.ref('settings/festivalTheme').once('value', (snap) => {
+        const theme = snap.val();
+        if (theme && theme !== 'none' && festivalThemes[theme]) {
+            const t = festivalThemes[theme];
+            document.body.classList.add('festival-' + theme);
+            document.getElementById('heroTag').textContent = t.tag;
+            document.getElementById('heroTitle').innerHTML = t.title + '<br>Feel Like <em id="heroEm">' + t.em + '</em>';
+            document.getElementById('heroSub').textContent = t.sub;
+            document.getElementById('heroBtn').innerHTML = t.btn + ' <i class="fas fa-arrow-right"></i>';
+            // Generate particles!
+            generateParticles(theme);
+        }
+    });
+
+    // 5. ระบบเมนูมือถือ (Bottom Nav & Overlay)
+    function toggleShopMenu() {
+        const overlay = document.getElementById('shopOverlay');
+        overlay.classList.toggle('active');
+    }
+</script>
+
+
+<script>
+// Mobile search toggle
+function toggleSearch() {
+    const sb = document.querySelector('.search-bar');
+    if (!sb) return;
+    sb.classList.toggle('active');
+    if (sb.classList.contains('active')) {
+        sb.querySelector('input').focus();
+    }
+}
+// Add search button to header on mobile
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 768) {
+        const userActions = document.querySelector('.user-actions');
+        if (userActions) {
+            const searchBtn = document.createElement('button');
+            searchBtn.className = 'search-toggle-btn';
+            searchBtn.innerHTML = '<i class="fas fa-search"></i>';
+            searchBtn.onclick = toggleSearch;
+            userActions.prepend(searchBtn);
+        }
+    }
+});
+</script>
+
+</body>
+</html>

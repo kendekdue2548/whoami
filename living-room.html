@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Room Collection - ME SOFA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* บังคับธีมสีให้ตรงกับหน้าแรก */
+        body { background-color: #FAF9F6; }
+
+        .collection-wrap {
+            padding: 40px 0 80px;
+        }
+
+        /* โครงสร้าง Card สีขาวเหมือนหน้าแรก */
+        .glass-card {
+            background: white;
+            border-radius: 15px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .category-head {
+            margin-bottom: 50px;
+        }
+
+        .category-head h1 {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: #2C2C2C;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .title-underline {
+            width: 60px;
+            height: 3px;
+            background: #8D7B68; /* สีน้ำตาลหลัก */
+            margin: 0 auto;
+        }
+
+        /* จัดระเบียบรายการสินค้า */
+        .product-list-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 35px;
+            justify-items: center;
+        }
+
+        /* ปรับสไตล์ Card ให้เหมือนหน้าแรก 100% */
+        .item-box {
+            width: 100%;
+            max-width: 320px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .item-box:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ซ่อนไอคอนบ้านที่ขวางหูขวางตาออกตามที่ขอ */
+        .breadcrumb-minimal {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-home-link {
+            color: #8D7B68;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+            .product-card img { height: 150px !important; }
+            .product-info { padding: 10px !important; }
+            .product-info h3 { font-size: 0.85rem !important; }
+            .filter-bar button { font-size: 0.75rem; padding: 5px 10px; }
+            .section-title { font-size: 1.2rem; }
+        }
+        @media (max-width: 768px) {
+            .products-section { padding: 20px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">
+                <h2>ME SOFA.</h2>
+            </div>
+            <div class="user-actions">
+                <a href="index.html" class="icon-link" title="กลับหน้าหลัก"><i class="fas fa-home"></i></a>
+                <a href="#" class="icon-link" onclick="toggleShopMenu(); return false;"><i class="fas fa-shopping-bag"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="collection-wrap">
+        <div class="container">
+        
+            <div class="glass-card">
+                <div class="category-head">
+                    <h1>Living Room</h1>
+                    <div class="title-underline"></div>
+                </div>
+
+                <div class="product-list-display">
+                    <div class="item-box">
+                        <div class="product-card" onclick="location.href='product-detail.html'">
+                            <div class="p-img">
+                                <span class="badge sale">-30%</span>
+                                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop" alt="Nordic Sofa">
+                            </div>
+                            <div class="p-info">
+                                <div class="p-cat">LIVING ROOM</div>
+                                <h3>Nordic L-Shape Sofa</h3>
+                                <div class="p-price">
+                                    <span class="curr">฿12,900</span>
+                                    <del class="old">฿18,500</del>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-container" id="masterBtn" onclick="toggleLineBubble(event)">
+        <a href="https://line.me/ti/p/ใส่IDLineของคุณตรงนี้" target="_blank" class="line-bubble" id="lineBubble">
+            <span class="at-symbol">@</span> LINE
+        </a>
+        <div class="main-contact-btn">
+            <div class="red-badge">
+                <span>ติดต่อ</span><span>สอบถาม</span>
+            </div>
+            <div class="icon-circle">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ระบบปุ่มติดต่อ
+        let bubbleTimer = null;
+        function toggleLineBubble(event) {
+            if (event.target.closest('.line-bubble')) return;
+            event.preventDefault(); event.stopPropagation();
+            const bubble = document.getElementById('lineBubble');
+            if (bubble.classList.contains('show-bubble')) {
+                bubble.classList.remove('show-bubble');
+                if (bubbleTimer) clearTimeout(bubbleTimer);
+            } else {
+                bubble.classList.add('show-bubble');
+                if (bubbleTimer) clearTimeout(bubbleTimer);
+                bubbleTimer = setTimeout(() => { bubble.classList.remove('show-bubble'); }, 120000);
+            }
+        }
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+<script>
+    // Config ตัวเดิมของพี่
+    const firebaseConfig = {
+        apiKey: "AIzaSyDFdgBMHIPgNGWhwR7gs1arC1lJbVYNr3k",
+        authDomain: "mesofa-admin.firebaseapp.com",
+        databaseURL: "https://mesofa-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "mesofa-admin",
+        storageBucket: "mesofa-admin.firebasestorage.app",
+        messagingSenderId: "758172615910",
+        appId: "1:758172615910:web:920af81b94c1b4b071e727"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // แก้ตรงนี้ให้ตรงกับ class="product-list-display" ด้านบน
+    const productGrid = document.querySelector('.product-list-display');
+    
+    db.ref('products/').on('value', (snapshot) => {
+        productGrid.innerHTML = '';
+        let found = false;
+        if (snapshot.exists()) {
+            snapshot.forEach((child) => {
+                const p = child.val();
+                if (p.category === 'living-room') {
+                    found = true;
+                    renderCard(p, child.key, 'LIVING ROOM');
+                }
+            });
+        }
+        if (!found) {
+            productGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">ยังไม่มีสินค้าในหมวดห้องนั่งเล่น</p>';
+        }
+    });
+
+    function renderCard(p, id, catLabel) {
+        productGrid.innerHTML += `
+            <div class="item-box">
+                <div class="product-card" onclick="location.href='product-detail.html?id=${id}'">
+                    <div class="p-img">
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="p-info">
+                        <div class="p-cat">${catLabel}</div>
+                        <h3>${p.name}</h3>
+                        <div class="p-price">
+                            <span class="curr">฿${Number(p.price).toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+</script>
+
+</body>
+</html>

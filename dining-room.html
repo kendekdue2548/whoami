@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Room Collection - ME SOFA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">
+                <h2>ME SOFA.</h2>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="ค้นหาโต๊ะทานข้าว...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="icon-link" onclick="toggleShopMenu(); return false;"><i class="fas fa-shopping-bag"></i></a>
+                <a href="index.html" class="icon-link"><i class="fas fa-home"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section-title">
+            <h3>DINING ROOM COLLECTION</h3>
+            <div class="line"></div>
+        </div>
+
+        <section class="product-grid" id="diningProducts">
+            </section>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDFdgBMHIPgNGWhwR7gs1arC1lJbVYNr3k",
+            authDomain: "mesofa-admin.firebaseapp.com",
+            databaseURL: "https://mesofa-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "mesofa-admin",
+            storageBucket: "mesofa-admin.firebasestorage.app",
+            messagingSenderId: "758172615910",
+            appId: "1:758172615910:web:920af81b94c1b4b071e727"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        const productGrid = document.querySelector('.product-grid');
+        
+        // ดึงเฉพาะหมวด Dining Room
+        db.ref('products/').on('value', (snapshot) => {
+        // filter client-side for category 'dining-room'
+            productGrid.innerHTML = ''; 
+            let __found_dining_room = false;
+        if (snapshot.exists()) { snapshot.forEach((child) => { if(child.val().category==='dining-room'){__found_dining_room=true; renderCard(child.val(),child.key,'DINING ROOM');} }); }
+        if (!__found_dining_room) {
+                // จุดแก้ไขที่ 3: ข้อความแจ้งเตือน
+                productGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px;">ยังไม่มีสินค้าในหมวดห้องกินข้าว</p>';
+                return;
+            }
+            snapshot.forEach((child) => {
+                const p = child.val();
+                renderCard(p, child.key);
+            });
+        });
+
+        // จุดแก้ไขที่ 2: เพิ่มฟังก์ชันสร้าง Card สินค้า
+        function renderCard(p, id) {
+            productGrid.innerHTML += `
+                <div class="product-card" onclick="location.href='product-detail.html?id=${id}'">
+                    <div class="p-img">
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="p-info">
+                        <div class="p-cat">DINING ROOM</div>
+                        <h3>${p.name}</h3>
+                        <div class="p-price">฿${Number(p.price).toLocaleString()}</div>
+                    </div>
+                </div>`;
+        }
+    </script>
+    
+</body>
+</html>
